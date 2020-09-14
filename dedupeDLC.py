@@ -1,4 +1,5 @@
 #example usage: $ python dedupeDLC.py 'MONTHLY RELATED.352' 'MONTHLY RELATED.353' -outFile 'dedupedSeptemberDLC.txt'
+#example usage: D:/> python C:\Users\miosuji\scriptsDLC\dedupeDLC.py "C:\Users\miosuji\scriptsDLC\MONTHLY RELATED.352" "C:\Users\miosuji\scriptsDLC\MONTHLY RELATED.353" -outFile "C:\Users\miosuji\scriptsDLC\dedupedSeptemberDLC.txt"
 #note: get help with the params to pass with 'python dedupeDLC.py -h'
 #note: you can pass many files to the program
 #note: all files' deduped output are combined and appended to into the output file
@@ -15,13 +16,14 @@ def dedupe():
 
   #open the output file in write mode
   outFile = args.outFile
-  with open(outFile, 'a') as outfile: #change from 'a' append mode to 'w' if we want to overwrite the output file
+  #note: change from 'a' append mode to 'w' if we want to overwrite the output file instead
+  with open(outFile, 'a', encoding='utf-8') as outfile:
     #for each filepath in the command line arguments
     for filepath in args.files:
       #open the file for reading, fp is the pointer to the file object
-      with open(filepath, 'r') as fp:        
+      with open(filepath, 'r', encoding='utf-8') as fp:        
         #start reading each line from file
-        line = fp.readline()      
+        line = fp.readline()
         while line:
           #get the record number (returns None if no record number in line)
           recordNumber = getRecordNumber(line)
